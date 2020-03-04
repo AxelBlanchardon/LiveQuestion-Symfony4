@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @UniqueEntity(fields={"pseudo"}, message="Il existe deja un compte utilisateur avec ce pseudo ! ")
  */
 class Utilisateur implements UserInterface
 {
@@ -25,6 +29,11 @@ class Utilisateur implements UserInterface
     private $email;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pseudo;
+
+    /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -34,6 +43,12 @@ class Utilisateur implements UserInterface
      * @ORM\Column(type="string")
      */
     private $motDePasse;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword; // propriété qui va stocker temporairement le mot de passe en clair saisi.
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -49,6 +64,7 @@ class Utilisateur implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Reponse", mappedBy="auteur", orphanRemoval=true)
      */
     private $reponses;
+
 
     public function __construct()
     {
@@ -126,6 +142,16 @@ class Utilisateur implements UserInterface
         return $this;
     }
 
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+ 
+    public function setPlainPassword($motDePasse)
+    {
+        $this->plainPassword = $motDePasse;
+    }
+
     /**
      * @see UserInterface
      */
@@ -201,6 +227,18 @@ class Utilisateur implements UserInterface
                 $reponse->setAuteur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
