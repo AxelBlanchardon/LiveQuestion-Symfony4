@@ -42,10 +42,11 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Accepter les condition dutilisation',
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Vous devez accepter les termes dutilisation.',
+                        'message' => "Vous devez accepter les termes d'utilisation.",
                     ]),
                 ],
             ])
+            
             ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -54,14 +55,15 @@ class RegistrationFormType extends AbstractType
                 
                 'first_options'  => ['label' => 'Entrez votre mot de passe : '],
                 'second_options' => ['label' => 'Repetez votre mot de passe : '],
-                'invalid_message' => 'Les mots de passe ne correspondent pas',
+                'invalid_message' => 'Les mots de passe saisis ne correspondent pas',
+
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez entrer votre mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit faire au minimum {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
