@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Bienvenue{% endblock %}
 
 {% block body %}
+
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="mb-3">Bonjour {{ app.user.pseudo }}</div>
+    {% endif %}
+
+    <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="">
 
 {% endblock %}

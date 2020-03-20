@@ -1,3 +1,6 @@
+body {
+    background-color: lightblue;
+  }
 .btn {
     background-color: #ec008c; 
     border: none;
@@ -7,4 +10,10 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+  }
+  
+  .navbar-light .navbar-brand {
+    color:#ec008c !important; 
+    
+
   }
