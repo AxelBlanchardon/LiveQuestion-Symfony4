@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Bienvenue sur LiveQuestion</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path("home") }}">ACCUEIL<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-primary">Admin</button>
+                <div class="btn-group" role="group">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="{{ path("") }}">administrer les questions</a>
+                        <a class="dropdown-item" href="{{ path("") }}">administrer les réponses</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path("app_logout") }}" class="btn btn-secondary my-2 my-sm-0">Se deconnecter</a>
+            {% else %}
+
+            <a href="{{ path("app_login") }}" class="btn btn-secondary my-2 my-sm-0">Se connecter</a>
+            <a href="{{ path("app_inscription") }}" class="btn btn-secondary my-2 my-sm-0">S'inscrire</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</nav>

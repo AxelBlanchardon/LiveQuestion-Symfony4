@@ -5,16 +5,20 @@
 
         <title>{% block title %}Bienvenue{% endblock %}</title>
 
-        {% block stylesheets %} 
-
+        {% block stylesheets %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/lux/bootstrap.min.css"/>
-
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
         {% endblock %}
+
+        {% include "inc/navbar.html.twig" %}
         
     </head>
 
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        {% endblock %}
     </body>
 </html>

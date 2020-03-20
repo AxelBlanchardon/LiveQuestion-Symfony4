@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode le plain password
+            // encodage du mot de passe
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -37,7 +37,7 @@ class RegistrationController extends AbstractController
 
             
 
-            return $this->redirectToRoute('_profiler_home');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/register.html.twig', [
