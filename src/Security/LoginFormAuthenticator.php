@@ -20,7 +20,7 @@ use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticato
 use Symfony\Component\Security\Guard\PasswordAuthenticatedInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class LoginFormAuthentificationAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
+class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements PasswordAuthenticatedInterface
 {
     use TargetPathTrait;
 
@@ -69,7 +69,7 @@ class LoginFormAuthentificationAuthenticator extends AbstractFormLoginAuthentica
 
         if (!$user) {
             // authentification invalide
-            throw new CustomUserMessageAuthenticationException('Il n"existe pas de compte avec cet email.');
+            throw new CustomUserMessageAuthenticationException("Il n'existe pas de compte avec cet email.");
         }
 
         return $user;
@@ -88,6 +88,9 @@ class LoginFormAuthentificationAuthenticator extends AbstractFormLoginAuthentica
         return $credentials['password'];
     }
 
+    /**
+     * Si l'authentification est réussie : on ridirige vers la route voulue
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         return new RedirectResponse($this->urlGenerator->generate('_profiler_home'));
