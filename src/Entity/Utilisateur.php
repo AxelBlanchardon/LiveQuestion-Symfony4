@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity(fields={"pseudo"}, message="Il existe deja un compte utilisateur avec ce pseudo ! ")
+ * @UniqueEntity(fields={"email"}, message="Il existe deja un compte utilisateur avec cet email ! ")
  */
 class Utilisateur implements UserInterface
 {
@@ -29,7 +30,7 @@ class Utilisateur implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $pseudo;
 
