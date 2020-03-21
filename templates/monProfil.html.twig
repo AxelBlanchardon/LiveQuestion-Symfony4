@@ -6,5 +6,9 @@
 {% block body %}
 
     <div class="mb-3">Bonjour {{ app.user.pseudo }} voici votre profil : </div>
+    <p>Votre email :  {{ app.user.email }}</p>
+    <p>Vous êtes : {{ app.user.genre }}</p>
+    <a href="{{ path("editer_mon_profil") }}" class="btn btn-secondary">Modifer mon compte</a>
+
 
 {% endblock %}
