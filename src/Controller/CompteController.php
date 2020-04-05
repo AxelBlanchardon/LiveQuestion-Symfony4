@@ -21,7 +21,7 @@ class CompteController extends AbstractController
      */
     public function profil()
     {
-        return $this->render('monProfil.html.twig', [
+        return $this->render('mon_profil.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
