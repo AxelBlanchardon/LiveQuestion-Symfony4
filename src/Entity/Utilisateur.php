@@ -46,7 +46,7 @@ class Utilisateur implements UserInterface
     private $motDePasse;
 
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"Registration"})
      * @Assert\Length(max=4096)
      */
     private $plainPassword; // propriété qui va stocker temporairement le mot de passe en clair saisi.

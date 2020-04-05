@@ -36,14 +36,18 @@ class CompteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            if (!empty($utilisateur->getPlainPassword())) {
 
-            $utilisateur->setPassword(
-                $passwordEncoder->encodePassword(
-                    $utilisateur,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
+                $utilisateur->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $utilisateur,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+               
+            }
+    
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('mon_profil');
@@ -70,5 +74,5 @@ class CompteController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
-    
+
 }

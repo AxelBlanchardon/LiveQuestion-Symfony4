@@ -19,8 +19,8 @@ class UtilisateurType extends AbstractType
             ->add('pseudo')
             ->add('plainPassword',  RepeatedType::class, [
                 'type' => PasswordType::class,
-                'options' => ['attr' => ['class' => 'password-field']],
                 'required' => false,
+                'options' => ['attr' => ['class' => 'password-field']],
                 'first_options'  => ['label' => 'Entrez le nouveau mot de passe : '],
                 'second_options' => ['label' => 'Repetez le mot de passe : '],
                 'invalid_message' => 'Les mots de passe ne correspondent pas',
