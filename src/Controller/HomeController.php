@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+use App\Entity\Question;
+use App\Repository\QuestionRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends AbstractController
 {
@@ -14,6 +19,17 @@ class HomeController extends AbstractController
     {
         return $this->render('public/index.html.twig', [
             'controller_name' => 'HomeController',
+        ]);
+    }
+
+    /**
+     * @Route("/accueil", name="accueil", methods={"GET"})
+     */
+    public function accueil(QuestionRepository $QuestionRepository): Response
+    {
+        
+        return $this->render('public/index.html.twig', [
+            'questions' => $QuestionRepository->findAll(),
         ]);
     }
 
