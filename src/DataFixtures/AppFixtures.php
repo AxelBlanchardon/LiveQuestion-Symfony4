@@ -70,14 +70,14 @@ class AppFixtures extends Fixture
          for ($i=0; $i < 20; $i++) { 
             
             $titre = $faker->sentence();
-            $createAt = new \DateTime();
-            $createAt = $faker->datetime($format = 'd-m-Y');
+        
+            $createdAt = $faker->datetimeBetween('-100 days', '-1 days');
             $auteur = $users[mt_rand(0, count($users) - 1)];
             $categorie = $categs[mt_rand(1, count($categs) - 1)];
             $question = new Question();
 
             $question->setTitre($titre)
-                        ->setDate($createAt)
+                        ->setCreatedAt($createdAt)
                         ->addCategorie($categorie)
                         ->setAuteur($auteur);
             

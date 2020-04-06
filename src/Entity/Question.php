@@ -27,12 +27,6 @@ class Question
     private $titre;
 
     /**
-     * @Gedmo\Timestampable(on="create")
-     * @@ORM\Column(type="datetime", , options={"default" : "CURRENT_TIMESTAMP"})
-     */
-    private $date;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", inversedBy="questions")
      */
     private $categorie;
@@ -47,6 +41,11 @@ class Question
      * @ORM\JoinColumn(nullable=false)
      */
     private $auteur;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -148,6 +147,18 @@ class Question
     public function setAuteur(?Utilisateur $auteur): self
     {
         $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
