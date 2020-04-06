@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Reponse;
+use App\Entity\Categorie;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
@@ -24,9 +27,10 @@ class Question
     private $titre;
 
     /**
-     * @ORM\Column(type="date")
+     * @Gedmo\Timestampable(on="create")
+     * @@ORM\Column(type="datetime", , options={"default" : "CURRENT_TIMESTAMP"})
      */
-    private $DateCreation;
+    private $date;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", inversedBy="questions")
@@ -67,12 +71,12 @@ class Question
         return $this;
     }
 
-    public function getDateCreation(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
         return $this->DateCreation;
     }
 
-    public function setDateCreation(\DateTimeInterface $DateCreation): self
+    public function setDate(\DateTimeInterface $DateCreation): self
     {
         $this->DateCreation = $DateCreation;
 
@@ -147,4 +151,5 @@ class Question
 
         return $this;
     }
+    
 }
