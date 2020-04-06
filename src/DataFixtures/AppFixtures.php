@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use Faker;
 use App\Entity\Utilisateur;
 use App\Entity\Question;
+use App\Entity\Reponse;
 use App\Entity\Categorie;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -67,10 +68,11 @@ class AppFixtures extends Fixture
 
          //Creation de questions
 
-         for ($i=0; $i < 20; $i++) { 
+         $questions = array();
+
+         for ($i=0; $i < 10; $i++) { 
             
             $titre = $faker->sentence();
-        
             $createdAt = $faker->datetimeBetween('-100 days', '-1 days');
             $auteur = $users[mt_rand(0, count($users) - 1)];
             $categorie = $categs[mt_rand(1, count($categs) - 1)];
@@ -82,6 +84,28 @@ class AppFixtures extends Fixture
                         ->setAuteur($auteur);
             
             $manager->persist($question);
+
+            $questions[] = $question;
+         }
+
+         //Creation de reponses
+
+         for ($i=0; $i < 40; $i++) { 
+
+            $reponse = new Reponse();
+            $contenu = $faker->sentence();
+            $createdAt = $faker->datetimeBetween('-100 days', '-1 days');
+            $auteur = $users[mt_rand(0, count($users) - 1)];
+            $laQuestion = $questions[mt_rand(0, count($questions) - 1)];
+            $categorie = $categs[mt_rand(1, count($categs) - 1)];
+
+
+            $reponse->setContenu($contenu)
+                        ->setDate($createdAt)
+                        ->setAuteur($auteur)
+                        ->setQuestion($laQuestion);
+            
+            $manager->persist($reponse);
          }
 
         $manager->flush();

@@ -22,7 +22,7 @@ class Reponse
     private $contenu;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $date;
 
