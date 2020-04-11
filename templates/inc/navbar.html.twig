@@ -7,10 +7,11 @@
 
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path("home") }}">ACCUEIL<span class="sr-only">(current)</span></a>
-            </li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path("accueil") }}">ACCUEIL<span class="sr-only">(current)</span></a>
+            </li>
+        
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path("home") }}">Poser une question</a>
             </li>

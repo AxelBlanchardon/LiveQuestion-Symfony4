@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+
+    <div class="mb-3">Bonjour {{ app.user.pseudo }}</div>
+    <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="">
+            
+    <p>question posée par : {{question.auteur.pseudo}} | {{question.reponses|length}} avis |
+
+        {% for categ in question.categorie %}
+            {{categ.nom}} 
+        {% endfor %}
+        postée le : {{ question.createdAt|date("d/m/Y") }}
+    </p>
+    <p>{{question.titre}}</p>
+
+    <p>{{question.reponses|length}} Réponses</p>
+
+    {% for reponse in question.reponses %}
+        Pseudo :{{reponse.auteur}}
+        <p>{{reponse.contenu}}</p>
+    {% endfor %}
+
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
+
+{% endblock %}
+

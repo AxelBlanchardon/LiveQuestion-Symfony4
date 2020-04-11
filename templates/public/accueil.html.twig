@@ -9,7 +9,7 @@
     <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="">
           
     {% for q in questions %}
-        <p>Titre : {{q.titre}} | 
+        <p><a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a> | 
         {% for categ in q.categorie %}
             {{categ.nom}} 
         {% endfor %}
