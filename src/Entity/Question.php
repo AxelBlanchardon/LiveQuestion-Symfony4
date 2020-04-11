@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\QuestionRepository")
@@ -28,6 +29,10 @@ class Question
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", inversedBy="questions")
+     * @Assert\Count(
+     *      min = 1,
+     *      minMessage = "Vous devez sélectionner au minimum une catégorie correspondant à votre question",
+     * )
      */
     private $categorie;
 
@@ -51,6 +56,7 @@ class Question
     {
         $this->categorie = new ArrayCollection();
         $this->reponses = new ArrayCollection();
+        $this->createdAt = new \DateTime('now');
     }
 
     public function getId(): ?int
@@ -162,5 +168,4 @@ class Question
 
         return $this;
     }
-    
 }

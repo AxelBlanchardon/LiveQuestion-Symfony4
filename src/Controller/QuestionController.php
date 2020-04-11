@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Reponse;
 use App\Entity\Question;
 use App\Form\ReponseType;
+use App\Form\QuestionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +38,32 @@ class QuestionController extends AbstractController
         }
         return $this->render('question/index.html.twig', [
             'question' => $question,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/poser_une_question", name="poser_une_question")
+     */
+    public function poser_une_question(Request $request, EntityManagerInterface $manager): Response
+    {
+        $question = new Question();
+        $form = $this->createForm(QuestionType::class, $question);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+     
+            $question->setAuteur($this->getUser());
+            
+            $manager->persist($question);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "Votre question a bien été pris en compte"
+            );
+        }
+        return $this->render('question/poser_question.html.twig', [
             'form' => $form->createView()
         ]);
     }

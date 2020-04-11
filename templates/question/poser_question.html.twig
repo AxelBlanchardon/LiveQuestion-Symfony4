@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+<div class="col-md-12 my-5">
+    Bonjour {{ app.user.pseudo }}
+    <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="">
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn">{{ button_label|default('Poser la question') }}</button>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
