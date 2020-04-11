@@ -23,12 +23,12 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/accueil", name="accueil", methods={"GET"})
+     * @Route("/accueil", name="accueil")
      */
     public function accueil(QuestionRepository $QuestionRepository): Response
     {
         
-        return $this->render('public/index.html.twig', [
+        return $this->render('public/accueil.html.twig', [
             'questions' => $QuestionRepository->findAll(),
         ]);
     }
