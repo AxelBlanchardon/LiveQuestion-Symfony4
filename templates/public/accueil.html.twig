@@ -14,7 +14,7 @@
             {{categ.nom}} 
         {% endfor %}
             | {{q.reponses|length}} avis
-            | question posée par : {{q.auteur.pseudo}}</p>
+            | question posée par : {{q.auteur.pseudo}} postée le : {{ q.createdAt|date("d/m/Y") }}</p>
      {% endfor %}
 
 {% endblock %}
