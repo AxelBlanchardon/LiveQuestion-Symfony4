@@ -43,12 +43,13 @@ class Utilisateur implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * 
      */
     private $motDePasse;
 
     /**
      * @Assert\NotBlank(groups={"Registration"})
-     * @RollerworksPassword\PasswordStrength(minLength=4, minStrength=4, message="Votre mot de passe doit contenir au minimum 6 caractères, au moins 1 chiffre et une majuscule")
+     * @RollerworksPassword\PasswordStrength(minLength=4, minStrength=4, message="Votre mot de passe doit contenir au minimum 6 caractères, 1 chiffre, 1 majuscule et 1 caractère spécial")
      */
     private $plainPassword; // propriété qui va stocker temporairement le mot de passe en clair saisi.
 
