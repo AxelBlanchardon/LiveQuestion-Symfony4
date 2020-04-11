@@ -18,11 +18,10 @@ class ReponseType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Votre réponse ne doit pas etre vide'
-                    ])
-                ],
-                'label' => 'Votre réponse'
-            ])
-            ;
+                        ])
+                    ],
+                'label' => 'Répondre à la question :'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
