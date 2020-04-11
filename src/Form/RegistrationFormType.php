@@ -52,22 +52,9 @@ class RegistrationFormType extends AbstractType
                 // this is read and encoded in the controller
                 'type' => PasswordType::class,
                 'options' => ['attr' => ['class' => 'password-field']],
-                
                 'first_options'  => ['label' => 'Entrez votre mot de passe : '],
                 'second_options' => ['label' => 'Repetez votre mot de passe : '],
                 'invalid_message' => 'Les mots de passe saisis ne correspondent pas',
-
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez entrer votre mot de passe',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit faire au minimum {{ limit }} caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
             ])
         ;
     }

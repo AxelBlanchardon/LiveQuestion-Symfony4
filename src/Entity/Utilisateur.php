@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Rollerworks\Component\PasswordStrength\Validator\Constraints as RollerworksPassword;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
@@ -47,7 +48,7 @@ class Utilisateur implements UserInterface
 
     /**
      * @Assert\NotBlank(groups={"Registration"})
-     * @Assert\Length(max=4096)
+     * @RollerworksPassword\PasswordStrength(minLength=4, minStrength=4, message="Votre mot de passe doit contenir au minimum 6 caractères, au moins 1 chiffre et une majuscule")
      */
     private $plainPassword; // propriété qui va stocker temporairement le mot de passe en clair saisi.
 

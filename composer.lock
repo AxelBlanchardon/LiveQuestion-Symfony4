@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fd7a8ba7d29e7f2d724e440a9db8937",
+    "content-hash": "92b309ebbc43c74154576cb211f5cd9b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1335,6 +1335,46 @@
             "time": "2020-01-18T06:26:05+00:00"
         },
         {
+            "name": "hackzilla/password-generator",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackzilla/password-generator.git",
+                "reference": "22c7af49ef46d349d60af0fa30f61dd4dec53330"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackzilla/password-generator/zipball/22c7af49ef46d349d60af0fa30f61dd4dec53330",
+                "reference": "22c7af49ef46d349d60af0fa30f61dd4dec53330",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hackzilla\\PasswordGenerator\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Platt",
+                    "email": "github@ofdan.co.uk",
+                    "homepage": "http://www.hackzilla.org"
+                }
+            ],
+            "description": "Password Generator Library",
+            "time": "2020-04-06T15:47:25+00:00"
+        },
+        {
             "name": "jdorn/sql-formatter",
             "version": "v1.2.17",
             "source": {
@@ -1922,6 +1962,141 @@
                 "psr-3"
             ],
             "time": "2019-11-01T11:05:21+00:00"
+        },
+        {
+            "name": "rollerworks/password-strength-bundle",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rollerworks/PasswordStrengthBundle.git",
+                "reference": "673021055a76d85a2817f4732a4d5feae0b4b4fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rollerworks/PasswordStrengthBundle/zipball/673021055a76d85a2817f4732a4d5feae0b4b4fb",
+                "reference": "673021055a76d85a2817f4732a4d5feae0b4b4fb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "rollerworks/password-strength-validator": "^1.0.1",
+                "symfony/framework-bundle": "^3.4.22 || ^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-dependency-injection-test": "^3.1.0 || ^4.1.0",
+                "symfony/console": "^3.4.22 || ^4.0 || ^5.0",
+                "symfony/phpunit-bridge": "^3.4.22 || ^4.0 || ^5.0",
+                "symfony/var-dumper": "^3.4.22 || ^4.0 || ^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rollerworks\\Bundle\\PasswordStrengthBundle\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "test/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastiaan Stok",
+                    "email": "s.stok@rollercapes.net"
+                },
+                {
+                    "name": "Luis Cordova",
+                    "email": "cordoval@gmail.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/rollerworks/PasswordStrengthBundle/contributors"
+                }
+            ],
+            "description": "Password-strength validator bundle for Symfony",
+            "keywords": [
+                "bundle",
+                "password",
+                "symfony",
+                "validator"
+            ],
+            "time": "2019-12-02T11:49:23+00:00"
+        },
+        {
+            "name": "rollerworks/password-strength-validator",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rollerworks/PasswordStrengthValidator.git",
+                "reference": "8c6441ba98253203964c2ecba53ef007e0324e33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rollerworks/PasswordStrengthValidator/zipball/8c6441ba98253203964c2ecba53ef007e0324e33",
+                "reference": "8c6441ba98253203964c2ecba53ef007e0324e33",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "psr/container": "^1.0",
+                "psr/log": "^1.0",
+                "symfony/polyfill-mbstring": "^1.5.0",
+                "symfony/translation": "^3.4.22 || ^4.0 || ^5.0",
+                "symfony/validator": "^3.4.22 || ^4.0 || ^5.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^1.4",
+                "php-http/httplug": "^1.1",
+                "symfony/config": "^3.4.22 || ^4.0 || ^5.0",
+                "symfony/console": "^3.4.22 || ^4.0 || ^5.0",
+                "symfony/phpunit-bridge": "^3.4.22 || ^4.0 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rollerworks\\Component\\PasswordStrength\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "test/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastiaan Stok",
+                    "email": "s.stok@rollercapes.net"
+                },
+                {
+                    "name": "Luis Cordova",
+                    "email": "cordoval@gmail.com"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "https://github.com/rollerworks/PasswordStrengthValidator/contributors"
+                }
+            ],
+            "description": "Password-strength validator for Symfony",
+            "keywords": [
+                "password",
+                "symfony",
+                "validator"
+            ],
+            "time": "2019-12-01T19:22:17+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -6303,6 +6478,7 @@
                 "monolog",
                 "productivity"
             ],
+            "abandoned": true,
             "time": "2019-10-24T07:13:31+00:00"
         },
         {
