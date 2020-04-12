@@ -8,6 +8,18 @@
     <div class="mb-3">Bonjour {{ app.user.pseudo }} voici votre profil : </div>
     <p>Votre email :  {{ app.user.email }}</p>
     <p>Vous êtes : {{ app.user.genre }}</p>
+    <p>Mes questions :</p>
+
+    {% for q in app.user.questions %}
+        <p>{{q.titre}}</p> 
+    {% endfor %}
+
+<p>Mes réponses :</p>
+    {% for r in app.user.reponses %}
+    <p>Titre de la question : {{r.question}}</p>
+        <p>{{r.contenu}}</p>
+    {% endfor %}
+
     <a href="{{ path("editer_mon_profil") }}" class="btn btn-secondary">Modifer mon compte</a>
 
 

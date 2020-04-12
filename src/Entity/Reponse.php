@@ -95,4 +95,8 @@ class Reponse
     {
         $this->date = new \DateTime('now');
     }
+    public function __toString()
+    {
+        return $this->question;
+    }
 }
