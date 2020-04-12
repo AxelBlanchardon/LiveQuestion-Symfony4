@@ -29,7 +29,7 @@ class HomeController extends AbstractController
     {
         
         return $this->render('public/accueil.html.twig', [
-            'questions' => $QuestionRepository->findAll(),
+            'questions' => $QuestionRepository->findBy(array(),array('createdAt' => 'DESC')),
         ]);
     }
 

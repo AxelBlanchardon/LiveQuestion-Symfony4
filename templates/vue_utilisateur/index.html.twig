@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VueUtilisateurController!{% endblock %}
+
+{% block body %}
+
+    <h1>Profil de {{ utilisateur.pseudo }}</h1>
+    <p>Genre : {{utilisateur.genre}}</p>
+    <p>Les questions posées par {{ utilisateur.pseudo }} :
+     {% for q in questions %}
+        <p>{{q.titre}} posée le {{q.createdAt|date("d/m/Y")}}</p> 
+    {% endfor %}
+
+{% endblock %}
