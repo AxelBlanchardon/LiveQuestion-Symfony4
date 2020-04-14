@@ -26,13 +26,21 @@ class AppFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         $genres = ['Homme', 'Femme', 'Autre'];
-        $genders = ['men', 'women'];
+        $genders= ['male', 'female'];
+        $gendersUrl = ['men', 'women'];
+
         $users = array();
 
          // on créé 40 users
          for ($i = 0; $i < 40; $i++) {
 
             $utilisateur = new Utilisateur();
+
+            $prenom = $faker->firstName($genders);
+            $nom = $faker->lastName($genders);
+            $nom=$nom; $nom=str_replace(' ','',$nom); //enleve les espaces possbibles dans le nom
+            $pseudo = $prenom.$nom;
+            $email = $pseudo.'@'.$faker->safeEmailDomain();
             $utilisateur->setGenre($faker->randomElement($genres));
             $avatar = 'https://randomuser.me/api/portraits/';
             $avatarId = $faker->numberBetween(1, 99) . '.jpg';
@@ -46,13 +54,13 @@ class AppFixtures extends Fixture
                     $avatar = $avatar . 'women/' . $avatarId;
                     break;
                 case "Autre":
-                    $gender = $faker->randomElement($genders);
+                    $gender = $faker->randomElement($gendersUrl);
                     $avatar = $avatar . $gender . '/' . $avatarId;
                     break;
             }
 
-            $utilisateur->setPseudo($faker->Username())
-                        ->setEmail($faker->email())
+            $utilisateur->setPseudo($pseudo)
+                        ->setEmail($email)
                         ->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Userdemo1'))
                         ->setRoles(['ROLE_USER'])
                         ->setAvatar($avatar);
