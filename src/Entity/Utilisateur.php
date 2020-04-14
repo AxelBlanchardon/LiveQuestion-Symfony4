@@ -68,6 +68,12 @@ class Utilisateur implements UserInterface
      */
     private $reponses;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message="Veuillez donner une URL valide pour votre avatar !")
+     */
+    private $avatar;
+
 
     public function __construct()
     {
@@ -248,5 +254,17 @@ class Utilisateur implements UserInterface
     public function __toString()
     {
         return $this->pseudo;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 }

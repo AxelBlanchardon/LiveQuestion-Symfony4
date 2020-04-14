@@ -24,9 +24,7 @@ class UtilisateurType extends AbstractType
                 'first_options'  => ['label' => 'Entrez le nouveau mot de passe : '],
                 'second_options' => ['label' => 'Repetez le mot de passe : '],
                 'invalid_message' => 'Les mots de passe ne correspondent pas',
-            ])
-
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

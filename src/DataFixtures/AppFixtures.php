@@ -23,54 +23,66 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
          // On configure dans quelles langues nous voulons nos données
-         $faker = Faker\Factory::create('fr_FR');
+        $faker = Faker\Factory::create('fr_FR');
 
-         $genres = ['Homme', 'Femme', 'Autre'];
-         $users = array();
+        $genres = ['Homme', 'Femme', 'Autre'];
+        $genders = ['men', 'women'];
+        $users = array();
 
-         // on créé 20 users
-         for ($i = 0; $i < 20; $i++) {
+         // on créé 40 users
+         for ($i = 0; $i < 40; $i++) {
 
-             $utilisateur = new Utilisateur();
+            $utilisateur = new Utilisateur();
+            $utilisateur->setGenre($faker->randomElement($genres));
+            $avatar = 'https://randomuser.me/api/portraits/';
+            $avatarId = $faker->numberBetween(1, 99) . '.jpg';
+            $genre = $utilisateur->getGenre();
 
-             $utilisateur->setGenre($faker->randomElement($genres));
-             $utilisateur->setPseudo($faker->Username());
-             $utilisateur->setEmail($faker->email());
-             $utilisateur->setPassword($this->passwordEncoder->encodePassword(
-                 $utilisateur,
-                 'Userdemo1'
-             ));
-             $utilisateur->setRoles(['ROLE_USER']);
+            switch ($genre) {
+                case "Homme":
+                    $avatar = $avatar . 'men/' . $avatarId;
+                    break;
+                case "Femme":
+                    $avatar = $avatar . 'women/' . $avatarId;
+                    break;
+                case "Autre":
+                    $gender = $faker->randomElement($genders);
+                    $avatar = $avatar . $gender . '/' . $avatarId;
+                    break;
+            }
 
-             $manager->persist($utilisateur);
+            $utilisateur->setPseudo($faker->Username())
+                        ->setEmail($faker->email())
+                        ->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'Userdemo1'))
+                        ->setRoles(['ROLE_USER'])
+                        ->setAvatar($avatar);
 
-             $users[] = $utilisateur; //tableau qui va contenir les utilisateurs créés par la fixture
+            $manager->persist($utilisateur);
+            $users[] = $utilisateur; //tableau qui va contenir les utilisateurs créés par la fixture
 
         }
         
         //Creation des categories
         $categs = [];
-        
-         $categs[1] = new Categorie();
-         $categs[1]->setNom("art");
-         $categs[2] = new Categorie();
-         $categs[2]->setNom("jeux-videos");
-         $categs[3] = new Categorie();
-         $categs[3]->setNom("serie");
-         $categs[4] = new Categorie();
-         $categs[4]->setNom("cinema");
-         $categs[5] = new Categorie();
-         $categs[5]->setNom("sport");
+        $categs[1] = new Categorie();
+        $categs[1]->setNom("art");
+        $categs[2] = new Categorie();
+        $categs[2]->setNom("jeux-videos");
+        $categs[3] = new Categorie();
+        $categs[3]->setNom("serie");
+        $categs[4] = new Categorie();
+        $categs[4]->setNom("cinema");
+        $categs[5] = new Categorie();
+        $categs[5]->setNom("sport");
 
         for ($i=1; $i < 6; $i++) { 
             $manager->persist($categs[$i]);
         }
 
-         //Creation de questions
+        //Creation de 30 questions
+        $questions = array();
 
-         $questions = array();
-
-         for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 30; $i++) { 
             
             $titre = $faker->sentence();
             $createdAt = $faker->datetimeBetween('-100 days', '-1 days');
@@ -88,8 +100,7 @@ class AppFixtures extends Fixture
             $questions[] = $question;
          }
 
-         //Creation de reponses
-
+         //Creation de 40 reponses
          for ($i=0; $i < 40; $i++) { 
 
             $reponse = new Reponse();
@@ -99,7 +110,6 @@ class AppFixtures extends Fixture
             $laQuestion = $questions[mt_rand(0, count($questions) - 1)];
             $categorie = $categs[mt_rand(1, count($categs) - 1)];
 
-
             $reponse->setContenu($contenu)
                         ->setDate($createdAt)
                         ->setAuteur($auteur)
@@ -107,7 +117,6 @@ class AppFixtures extends Fixture
             
             $manager->persist($reponse);
          }
-
         $manager->flush();
     }
 }
