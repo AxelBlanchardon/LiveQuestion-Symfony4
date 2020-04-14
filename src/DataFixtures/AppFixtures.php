@@ -31,33 +31,37 @@ class AppFixtures extends Fixture
 
         $users = array();
 
-         // on créé 40 users
-         for ($i = 0; $i < 40; $i++) {
+         // on créé 20 users
+         for ($i = 0; $i < 20; $i++) {
 
             $utilisateur = new Utilisateur();
-
-            $prenom = $faker->firstName($genders);
-            $nom = $faker->lastName($genders);
-            $nom=$nom; $nom=str_replace(' ','',$nom); //enleve les espaces possbibles dans le nom
-            $pseudo = $prenom.$nom;
-            $email = $pseudo.'@'.$faker->safeEmailDomain();
-            $utilisateur->setGenre($faker->randomElement($genres));
             $avatar = 'https://randomuser.me/api/portraits/';
             $avatarId = $faker->numberBetween(1, 99) . '.jpg';
-            $genre = $utilisateur->getGenre();
+            $genre = $faker->randomElement($genres);
+            $utilisateur->setGenre($genre);
 
             switch ($genre) {
                 case "Homme":
+                    $prenom = $faker->firstName('male');
+                    $nom = $faker->lastName();
                     $avatar = $avatar . 'men/' . $avatarId;
                     break;
                 case "Femme":
+                    $prenom = $faker->firstName('female');
+                    $nom = $faker->lastName();
                     $avatar = $avatar . 'women/' . $avatarId;
                     break;
                 case "Autre":
                     $gender = $faker->randomElement($gendersUrl);
+                    $prenom = $faker->firstName($faker->randomElement($genders));
+                    $nom = $faker->lastName();
                     $avatar = $avatar . $gender . '/' . $avatarId;
                     break;
             }
+            
+            $nom=$nom; $nom=str_replace(' ','',$nom); //enleve les espaces possbibles dans le nom
+            $pseudo = $prenom.$nom;
+            $email = $pseudo.'@'.$faker->safeEmailDomain();
 
             $utilisateur->setPseudo($pseudo)
                         ->setEmail($email)

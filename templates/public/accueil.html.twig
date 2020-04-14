@@ -6,15 +6,16 @@
 {% block body %}
 
     <div class="mb-3">Bonjour {{ app.user.pseudo }}</div>
-    <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="">
-          
+    <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="livequestion"/>
+
     {% for q in questions %}
-        <p><a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a> | 
+        <p><a href="{{ path('vue_utilisateur', { 'pseudo': q.auteur.pseudo }) }}"><img class="user" src="{{q.auteur.avatar}}" alt="{{q.auteur.pseudo}}"/></a>
+        {{q.auteur.pseudo}} | <a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a> | 
         {% for categ in q.categorie %}
             {{categ.nom}} 
         {% endfor %}
             | {{q.reponses|length}} avis
-            | question posée par : {{q.auteur.pseudo}} postée le : {{ q.createdAt|date("d/m/Y") }}</p>
+            | postée le : {{ q.createdAt|date("d/m/Y") }}</p>
      {% endfor %}
 
 {% endblock %}
