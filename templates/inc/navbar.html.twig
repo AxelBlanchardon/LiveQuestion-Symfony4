@@ -11,7 +11,7 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path("accueil") }}">ACCUEIL<span class="sr-only">(current)</span></a>
             </li>
-        
+
             <li class="nav-item active">
                 <a class="nav-link" href="{{ path("poser_une_question") }}">Poser une question</a>
             </li>
@@ -20,20 +20,9 @@
             </li>
         {% endif %}
         </ul>
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                <button type="button" class="btn btn-primary">Menu Admin</button>
-                <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="{{ path("home") }}">administrer les questions</a>
-                        <a class="dropdown-item" href="{{ path("home") }}">administrer les réponses</a>
-                    </div>
-                </div>
-            </div>
-        {% else %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path("admin_question_index") }}" class="btn btn-secondary my-2 my-sm-0">Administration</a>
+            {% endif %}
              {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{ path("app_logout") }}" class="btn btn-secondary my-2 my-sm-0">Se deconnecter</a>
             {% else %}
@@ -41,6 +30,5 @@
             <a href="{{ path("app_login") }}" class="btn btn-secondary my-2 my-sm-0">Se connecter</a>
             <a href="{{ path("app_inscription") }}" class="btn btn-secondary my-2 my-sm-0">S'inscrire</a>
             {% endif %}
-        {% endif %}
     </div>
 </nav>
