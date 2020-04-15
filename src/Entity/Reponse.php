@@ -90,11 +90,12 @@ class Reponse
 
         return $this;
     }
-    
+
     public function __construct()
     {
         $this->date = new \DateTime('now');
     }
+
     public function __toString()
     {
         return $this->question;

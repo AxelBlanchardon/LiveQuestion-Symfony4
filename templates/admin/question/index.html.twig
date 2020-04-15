@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des questions{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+{% for message in app.flashes('success') %}
+   <div class="alert alert-success">
+      {{ message }}
+    </div>
+{% endfor %}
+
+  <h1 class="my-5">Gestion des questions</h1>
+  <table class"table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Titre</th>
+        <th>Auteur</th>
+        <th>Réponses</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for question in questions %}
+      <tr>
+        <td>{{question.id}}</td>
+        <td>{{question.titre}}</td>
+        <td>
+          <img src="{{question.auteur.avatar}}" alt="Avatar de {{question.auteur.pseudo}}" class="avatar avatar-mini mr-2">
+          {{question.auteur.pseudo}}
+        </td>
+        <td class="text-center">
+          <span class="badge badge-primary rounded">{{question.reponses | length}}</span>
+        </td>
+        <td>
+        <a href="" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+        <a href="{{ path('admin_question_delete', { 'id': question.id }) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -9,10 +9,10 @@
     <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="livequestion"/>
 
     {% for q in questions %}
-        <p><a href="{{ path('vue_utilisateur', { 'pseudo': q.auteur.pseudo }) }}"><img class="user" src="{{q.auteur.avatar}}" alt="{{q.auteur.pseudo}}"/></a>
-        {{q.auteur.pseudo}} | <a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a> | 
+        <p><a href="{{ path('vue_utilisateur', { 'pseudo': q.auteur.pseudo }) }}"><img class="avatar avatar mr-2" src="{{q.auteur.avatar}}" alt="{{q.auteur.pseudo}}"/></a>
+        {{q.auteur.pseudo}} | <a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a> |
         {% for categ in q.categorie %}
-            {{categ.nom}} 
+            {{categ.nom}}
         {% endfor %}
             | {{q.reponses|length}} avis
             | postée le : {{ q.createdAt|date("d/m/Y") }}</p>
