@@ -69,7 +69,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // authentification invalide
-            throw new CustomUserMessageAuthenticationException("Il n'existe pas de compte avec ce pseudo.");
+            throw new CustomUserMessageAuthenticationException("Identifiants invalides");
         }
 
         return $user;
@@ -102,5 +102,5 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
 
-    
+
 }

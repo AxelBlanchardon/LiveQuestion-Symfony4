@@ -58,7 +58,7 @@ class AppFixtures extends Fixture
                     $avatar = $avatar . $gender . '/' . $avatarId;
                     break;
             }
-            
+
             $nom=$nom; $nom=str_replace(' ','',$nom); //enleve les espaces possbibles dans le nom
             $pseudo = $prenom.$nom;
             $email = $pseudo.'@'.$faker->safeEmailDomain();
@@ -73,7 +73,18 @@ class AppFixtures extends Fixture
             $users[] = $utilisateur; //tableau qui va contenir les utilisateurs créés par la fixture
 
         }
-        
+
+        //creation d'un admin
+        $admin = new Utilisateur();
+        $admin->setPseudo("Admin")
+            ->setEmail("admin@gmail.com")
+            ->setPassword($this->passwordEncoder->encodePassword($utilisateur, 'AdminPassword'))
+            ->setGenre("Homme")
+            ->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($admin);
+        $manager->flush();
+
         //Creation des categories
         $categs = [];
         $categs[1] = new Categorie();
@@ -87,15 +98,15 @@ class AppFixtures extends Fixture
         $categs[5] = new Categorie();
         $categs[5]->setNom("sport");
 
-        for ($i=1; $i < 6; $i++) { 
+        for ($i=1; $i < 6; $i++) {
             $manager->persist($categs[$i]);
         }
 
         //Creation de 30 questions
         $questions = array();
 
-        for ($i=0; $i < 30; $i++) { 
-            
+        for ($i=0; $i < 30; $i++) {
+
             $titre = $faker->sentence();
             $createdAt = $faker->datetimeBetween('-100 days', '-1 days');
             $auteur = $users[mt_rand(0, count($users) - 1)];
@@ -106,14 +117,14 @@ class AppFixtures extends Fixture
                         ->setCreatedAt($createdAt)
                         ->addCategorie($categorie)
                         ->setAuteur($auteur);
-            
+
             $manager->persist($question);
 
             $questions[] = $question;
          }
 
          //Creation de 40 reponses
-         for ($i=0; $i < 40; $i++) { 
+         for ($i=0; $i < 40; $i++) {
 
             $reponse = new Reponse();
             $contenu = $faker->sentence();
@@ -126,7 +137,7 @@ class AppFixtures extends Fixture
                         ->setDate($createdAt)
                         ->setAuteur($auteur)
                         ->setQuestion($laQuestion);
-            
+
             $manager->persist($reponse);
          }
         $manager->flush();
