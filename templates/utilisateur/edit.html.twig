@@ -3,11 +3,11 @@
 {% block title %}Modifier mon compte{% endblock %}
 
 {% block body %}
-    <h1>Modifier votre compte</h1>
-
-    {{ include('utilisateur/_form.html.twig', {'button_label': 'Enregistrer'}) }}
-
-    <a href="{{ path('mon_profil') }}">Retour à votre profil</a>
-
-    {{ include('utilisateur/_delete_form.html.twig') }}
+    <div class="mt-5">
+        <div class="col-md-4 offset-md-4">
+        <h1>Modifier votre compte</h1>
+            {{ include('utilisateur/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+            <p>{{ include('utilisateur/_delete_form.html.twig') }}</p>
+        </div>
+    </div>
 {% endblock %}

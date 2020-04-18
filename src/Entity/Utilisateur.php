@@ -2,14 +2,18 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Rollerworks\Component\PasswordStrength\Validator\Constraints as RollerworksPassword;
+
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
@@ -43,7 +47,7 @@ class Utilisateur implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * 
+     *
      */
     private $motDePasse;
 
@@ -69,11 +73,9 @@ class Utilisateur implements UserInterface
     private $reponses;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url(message="Veuillez donner une URL valide pour votre avatar !")
+     * @ORM\OneToOne(targetEntity="App\Entity\Avatar", inversedBy="utilisateur", cascade={"persist", "remove"})
      */
     private $avatar;
-
 
     public function __construct()
     {
@@ -155,7 +157,7 @@ class Utilisateur implements UserInterface
     {
         return $this->plainPassword;
     }
- 
+
     public function setPlainPassword($motDePasse)
     {
         $this->plainPassword = $motDePasse;
@@ -251,20 +253,22 @@ class Utilisateur implements UserInterface
 
         return $this;
     }
-    public function __toString()
-    {
-        return $this->pseudo;
-    }
 
-    public function getAvatar(): ?string
+    public function getAvatar(): ?Avatar
     {
         return $this->avatar;
     }
 
-    public function setAvatar(?string $avatar): self
+    public function setAvatar(?Avatar $avatar): self
     {
         $this->avatar = $avatar;
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->pseudo;
+    }
+
 }

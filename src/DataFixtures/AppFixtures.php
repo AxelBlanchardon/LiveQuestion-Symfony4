@@ -3,10 +3,11 @@
 namespace App\DataFixtures;
 
 use Faker;
-use App\Entity\Utilisateur;
-use App\Entity\Question;
+use App\Entity\Avatar;
 use App\Entity\Reponse;
+use App\Entity\Question;
 use App\Entity\Categorie;
+use App\Entity\Utilisateur;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -35,7 +36,8 @@ class AppFixtures extends Fixture
          for ($i = 0; $i < 20; $i++) {
 
             $utilisateur = new Utilisateur();
-            $avatar = 'https://randomuser.me/api/portraits/';
+            $avatar = new Avatar();
+            $url = 'https://randomuser.me/api/portraits/';
             $avatarId = $faker->numberBetween(1, 99) . '.jpg';
             $genre = $faker->randomElement($genres);
             $utilisateur->setGenre($genre);
@@ -44,24 +46,27 @@ class AppFixtures extends Fixture
                 case "Homme":
                     $prenom = $faker->firstName('male');
                     $nom = $faker->lastName();
-                    $avatar = $avatar . 'men/' . $avatarId;
+                    $url = $url . 'men/' . $avatarId;
                     break;
                 case "Femme":
                     $prenom = $faker->firstName('female');
                     $nom = $faker->lastName();
-                    $avatar = $avatar . 'women/' . $avatarId;
+                    $url = $url . 'women/' . $avatarId;
                     break;
                 case "Autre":
                     $gender = $faker->randomElement($gendersUrl);
                     $prenom = $faker->firstName($faker->randomElement($genders));
                     $nom = $faker->lastName();
-                    $avatar = $avatar . $gender . '/' . $avatarId;
+                    $url = $url . $gender . '/' . $avatarId;
                     break;
             }
 
-            $nom=$nom; $nom=str_replace(' ','',$nom); //enleve les espaces possbibles dans le nom
+            $nom=str_replace(' ','',$nom); //enleve les espaces possbibles dans le nom
             $pseudo = $prenom.$nom;
             $email = $pseudo.'@'.$faker->safeEmailDomain();
+
+            $avatar->setUpdatedAt(new \DateTime())
+                    ->setImageName($url);
 
             $utilisateur->setPseudo($pseudo)
                         ->setEmail($email)
@@ -70,6 +75,7 @@ class AppFixtures extends Fixture
                         ->setAvatar($avatar);
 
             $manager->persist($utilisateur);
+
             $users[] = $utilisateur; //tableau qui va contenir les utilisateurs créés par la fixture
 
         }

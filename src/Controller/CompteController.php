@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @Route("/mon_profil")
@@ -25,7 +28,7 @@ class CompteController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-    
+
     /**
      * @Route("/editer", name="editer_mon_profil")
      */
@@ -36,19 +39,17 @@ class CompteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            if (!empty($utilisateur->getPlainPassword())) {
+            $this->getDoctrine()->getManager()->flush();
 
+            if (!empty($utilisateur->getPlainPassword())) {
                 $utilisateur->setPassword(
                     $passwordEncoder->encodePassword(
                         $utilisateur,
                         $form->get('plainPassword')->getData()
                     )
                 );
-               
+
             }
-    
-            $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('mon_profil');
         }
@@ -58,7 +59,7 @@ class CompteController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-    
+
     /**
      * @Route("/{id}", name="utilisateur_delete", methods={"DELETE"})
      */

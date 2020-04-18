@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier votre avatar{% endblock %}
+
+{% block body %}
+    <div class="mt-5">
+        <div class="col-md-4 offset-md-4">
+        <h1>Modifier votre avatar</h1>
+            {{ include('avatar/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        </div>
+    </div>
+{% endblock %}
