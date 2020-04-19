@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Reponse;
 use App\Entity\Categorie;
+use App\Entity\Utilisateur;
+use App\Entity\QuestionLike;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
@@ -52,11 +54,17 @@ class Question
      */
     private $createdAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionLike", mappedBy="question")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->categorie = new ArrayCollection();
         $this->reponses = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -171,5 +179,44 @@ class Question
     public function __toString()
     {
         return $this->titre;
+    }
+
+    /**
+     * @return Collection|QuestionLike[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(QuestionLike $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(QuestionLike $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getQuestion() === $this) {
+                $like->setQuestion(null);
+            }
+        }
+
+        return $this;
+    }
+    public function isLikedByUser(Utilisateur $utilisateur) : bool
+    {
+        foreach ($this->likes as $like) {
+            if ($like->getUtilisateur() === $utilisateur) return true;
+        }
+
+        return false;
     }
 }

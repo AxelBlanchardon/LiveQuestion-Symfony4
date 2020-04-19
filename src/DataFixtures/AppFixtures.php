@@ -8,6 +8,7 @@ use App\Entity\Reponse;
 use App\Entity\Question;
 use App\Entity\Categorie;
 use App\Entity\Utilisateur;
+use App\Entity\QuestionLike;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -125,8 +126,15 @@ class AppFixtures extends Fixture
                         ->setAuteur($auteur);
 
             $manager->persist($question);
-
             $questions[] = $question;
+
+            for ($j=0; $j < mt_rand(0,10); $j++) {
+                $like = new QuestionLike();
+                $like->setQuestion($question)
+                        ->setUtilisateur($faker->randomElement($users));
+            $manager->persist($like);
+
+            }
          }
 
          //Creation de 40 reponses

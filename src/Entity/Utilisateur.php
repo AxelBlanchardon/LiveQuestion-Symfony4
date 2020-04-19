@@ -77,10 +77,16 @@ class Utilisateur implements UserInterface
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionLike", mappedBy="utilisateur")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->reponses = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,6 +275,37 @@ class Utilisateur implements UserInterface
     public function __toString()
     {
         return $this->pseudo;
+    }
+
+    /**
+     * @return Collection|QuestionLike[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(QuestionLike $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(QuestionLike $like): self
+    {
+        if ($this->likes->contains($like)) {
+            $this->likes->removeElement($like);
+            // set the owning side to null (unless already changed)
+            if ($like->getUtilisateur() === $this) {
+                $like->setUtilisateur(null);
+            }
+        }
+
+        return $this;
     }
 
 }
