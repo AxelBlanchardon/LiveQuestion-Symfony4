@@ -78,7 +78,7 @@ class Utilisateur implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\QuestionLike", mappedBy="utilisateur")
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionLike", mappedBy="utilisateur", orphanRemoval=true)
      */
     private $likes;
 
