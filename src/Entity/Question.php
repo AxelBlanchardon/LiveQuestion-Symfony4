@@ -55,7 +55,7 @@ class Question
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\QuestionLike", mappedBy="question")
+     * @ORM\OneToMany(targetEntity="App\Entity\QuestionLike", mappedBy="question", orphanRemoval=true)
      */
     private $likes;
 
