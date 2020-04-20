@@ -18,9 +18,9 @@
 
             {% set url = q.auteur.avatar.imageName %}
             {% if 'http' in url %}
-                <img class="avatar avatar mr-2" src="{{q.auteur.avatar.imageName}}"/>
+                <img class="avatar avatar mr-2" src="{{q.auteur.avatar}}"/>
             {% else %}
-                <img class="avatar avatar mr-2" src="{{ asset('images/avatar/' ~ q.auteur.avatar.imageName ~ '') }}" alt="{{q.auteur.pseudo}}"/></a>
+                <img class="avatar avatar mr-2" src="{{ asset('images/avatar/' ~ q.auteur.avatar ~ '') }}" alt="{{q.auteur.pseudo}}"/></a>
             {% endif %}
         {% else %}
             <img class="avatar avatar mr-2" src="{{ asset('images/avatar/userDefaut.png') }}" alt="{{q.auteur.pseudo}}"/></a>

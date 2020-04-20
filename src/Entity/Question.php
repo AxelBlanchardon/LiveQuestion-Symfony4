@@ -84,18 +84,6 @@ class Question
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->DateCreation;
-    }
-
-    public function setDate(\DateTimeInterface $DateCreation): self
-    {
-        $this->DateCreation = $DateCreation;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Categorie[]
      */
