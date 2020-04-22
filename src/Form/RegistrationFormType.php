@@ -36,7 +36,7 @@ class RegistrationFormType extends AbstractType
                     'non binaire' => 'non binaire',
                 ],
             ])
-            
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'label' => "Accepter les conditions d'utilisation",

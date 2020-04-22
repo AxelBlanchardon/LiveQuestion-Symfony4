@@ -101,7 +101,7 @@ class Avatar implements \Serializable
     {
         return serialize(array(
             $this->id,
-            $this->imageName,
+
         ));
     }
 
@@ -109,7 +109,7 @@ class Avatar implements \Serializable
     {
         list (
             $this->id,
-            $this->imageName,
+
             ) = unserialize($serialized, array('allowed_classes' => false));
     }
 

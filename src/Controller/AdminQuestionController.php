@@ -21,7 +21,7 @@ class AdminQuestionController extends AbstractController
     }
 
     /**
-     * Permet de supprimer une annonce
+     * Permet de supprimer une question
      *
      * @Route("/admin/questions/{id}/delete", name="admin_question_delete")
      *
