@@ -122,7 +122,7 @@ class AppFixtures extends Fixture
 
             $question->setTitre($titre)
                         ->setCreatedAt($createdAt)
-                        ->addCategorie($categorie)
+                        ->setCategorie($categorie)
                         ->setAuteur($auteur);
 
             $manager->persist($question);

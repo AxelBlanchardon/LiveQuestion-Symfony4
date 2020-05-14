@@ -8,7 +8,8 @@
     <p>Genre : {{utilisateur.genre}}</p>
     <p>Les questions posées par {{ utilisateur.pseudo }} :
      {% for q in questions %}
-        <p>{{q.titre}} posée le {{q.createdAt|date("d/m/Y")}}</p> 
+        <p><a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a>
+        | {{q.reponses|length}} avis | posée le {{q.createdAt|date("d/m/Y")}} à {{ q.createdAt|date("h:m") }}</p>
     {% endfor %}
 
 {% endblock %}

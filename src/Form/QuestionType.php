@@ -32,8 +32,8 @@ class QuestionType extends AbstractType
             ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
-                'label' => 'Sélectionner une ou des catégories correspondant a votre question:',
-                'multiple' => true,
+                'label' => 'Sélectionner une catégorie correspondant a votre question:',
+                'multiple' => false,
                 'expanded' => true,
                 ]);
     }

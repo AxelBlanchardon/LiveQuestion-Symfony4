@@ -30,11 +30,8 @@ class Question
     private $titre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Categorie", inversedBy="questions")
-     * @Assert\Count(
-     *      min = 1,
-     *      minMessage = "Vous devez sélectionner au minimum une catégorie correspondant à votre question",
-     * )
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="questions")
+     *
      */
     private $categorie;
 
@@ -61,7 +58,6 @@ class Question
 
     public function __construct()
     {
-        $this->categorie = new ArrayCollection();
         $this->reponses = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->likes = new ArrayCollection();
@@ -84,28 +80,14 @@ class Question
         return $this;
     }
 
-    /**
-     * @return Collection|Categorie[]
-     */
-    public function getCategorie(): Collection
+    public function getCategorie(): ?Categorie
     {
         return $this->categorie;
     }
 
-    public function addCategorie(Categorie $categorie): self
+    public function setCategorie(Categorie $categorie): self
     {
-        if (!$this->categorie->contains($categorie)) {
-            $this->categorie[] = $categorie;
-        }
-
-        return $this;
-    }
-
-    public function removeCategorie(Categorie $categorie): self
-    {
-        if ($this->categorie->contains($categorie)) {
-            $this->categorie->removeElement($categorie);
-        }
+        $this->categorie = $categorie;
 
         return $this;
     }

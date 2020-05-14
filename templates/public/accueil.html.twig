@@ -10,10 +10,8 @@
 
     {% for q in questions %}
 
-    <p><a href="{{ path('vue_utilisateur', { 'pseudo': q.auteur.pseudo }) }}">
-
     {# Permet d'afficher les avatars des fixtures en env de dev ce code sera modifié en env deproduction #}
-
+    <p>
         {% if q.auteur.avatar.imageName  is defined and q.auteur.avatar.imageName  is not null %}
 
             {% set url = q.auteur.avatar.imageName %}
@@ -25,7 +23,7 @@
         {% else %}
             <img class="avatar avatar mr-2" src="{{ asset('images/avatar/userDefaut.png') }}" alt="{{q.auteur.pseudo}}"/></a>
         {% endif %}
-            {{q.auteur.pseudo}} | <a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a> |
+            <a href="{{ path('vue_utilisateur', { 'pseudo': q.auteur.pseudo }) }}">{{q.auteur.pseudo}}</a> | <a href="{{ path('voir_question', { 'id': q.id }) }}">{{q.titre}}</a>
             {% for categ in q.categorie %}
                 {{categ.nom}}
             {% endfor %}
@@ -39,7 +37,8 @@
                     <span class="js-likes">{{q.likes | length}}</span>
                     <span class="js-label">J'aime</span>
                 </a>
-                | postée le : {{ q.createdAt|date("d/m/Y") }}</p>
+                | postée le : {{ q.createdAt|date("d/m/Y") }} à {{ q.createdAt|date("h:m") }}
+    </p>
         {% endfor %}
 
 {% endblock %}

@@ -24,7 +24,7 @@ class Categorie
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Question", mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Question", mappedBy="categorie")
      */
     private $questions;
 
@@ -77,7 +77,7 @@ class Categorie
 
         return $this;
     }
-    
+
     public function __toString()
     {
         return $this->nom;

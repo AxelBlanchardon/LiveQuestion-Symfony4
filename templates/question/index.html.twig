@@ -6,13 +6,11 @@
 {% block body %}
 
     <div class="mb-3">Bonjour {{ app.user.pseudo }}</div>
-    <h1 class="pt-5 mt-0">Bienvenue sur le réseau social</h1><img src="{{ asset('img/live.png') }}" alt="">
-            
-    <p>question posée par : {{question.auteur.pseudo}} | {{question.reponses|length}} avis |
+    <p>Question posée par : {{question.auteur.pseudo}} | {{question.reponses|length}} avis |
         {% for categ in question.categorie %}
-            {{categ.nom}} 
+            {{categ.nom}}
         {% endfor %}
-        postée le : {{ question.createdAt|date("d/m/Y") }}
+        postée le : {{ question.createdAt|date("d/m/Y") }} à {{ question.createdAt|date("h:m") }}
     </p>
     <p>{{question.titre}}</p>
 
