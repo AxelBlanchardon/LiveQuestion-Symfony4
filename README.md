@@ -17,13 +17,12 @@ Projet personnel encadré (PPE) réalisé en équipe de 4 pour le BTS SIO SLAM.
 * Versionning : git, Bitbucket
 * Gestion de projet : Trello
 
-### Outils utilisés :
+### Les développeurs :
 
 * Axel Blanchardon
 * Allan Beliez
 * Youssef Guerzou
 * Arnaud Lagarde
-
 
 
 ### Installation : 
