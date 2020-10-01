@@ -1,45 +1,76 @@
-Projet LiveQuestion dans le cadre du BTS SIO option SLAM
-Description :
-Réalisation d'un réseau social avec le framework Symfony, les utilisateurs une fois inscris peuvent se connecter, poser des questions et repondre à celles des autres.
+# LiveQuestion-Symfony4 
 
-Contexte :
+Projet LiveQuestion dans le cadre du BTS SIO option SLAM Description : Réalisation d'un réseau social avec le framework Symfony, les utilisateurs une fois inscris peuvent se connecter, poser des questions et repondre à celles des autres.
+
+## Contexte :
+
 Projet personnel encadré (PPE) réalisé en équipe de 4 pour le BTS SIO SLAM.
 
-Technologies utilisées :
-Intégration : Bootstrap, HTML5, CSS3
+### Technologies utilisées :
 
-Animation : Javascript, jQuery, Ajax avec la librairie AXIOX
+* Intégration : Bootstrap, HTML5, CSS3
+* Javascript, jQuery, Ajax avec la librairie AXIOS
 
-Outils utilisés :
-Slack pour les échanges entre les membres de l'équipe
+### Outils utilisés :
 
-Versionning : git, Bitbucket
+* Slack pour les échanges entre les membres
+* Versionning : git, Bitbucket
+* Gestion de projet : Trello
 
-Suivi des bugs : Issues dans Bitbucket
+### Outils utilisés :
 
-Gestion de projet : Trello
+* Axel Blanchardon
+* Allan Beliez
+* Youssef Guerzou
+* Arnaud Lagarde
 
-Membres de l'équipe :
-Axel Blanchardon
-Allan Beliez
-Youssef Guerzou
-Arnaud Lagarde
 
-Pour installer et tester notre projet:
-Installer les dossiers var et vendors :
+
+### Installation : 
+
+Pour installer et tester notre projet: 
+
+
+```
 Composer install
+```
 
-Pour créer la base de donnée et charger les fixtures :
+Pour créer la base de donnée :
+
+```
 php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
+```
+
+Pour créer la base de donnée :
+
+```
+php bin/console doctrine:database:create
+
+php bin/console doctrine:schema:update
+```
+
+Enfin pour charger les fausses données de test avec les fixtures:
+
+```
 php bin/console doctrine:fixtures:load
+```
 
-Lancer le serveur Symfony pour lancer le projet:
-symfony serve
-ou bien :
+Lancer le serveur Symfony pour lancer le projet :
+
+```
+symfony serve 
+```
+ou
+
+```
 php bin/console server:run
+```
 
-Comptes pour tester le projet
-Mot de passe des comptes utilisateurs des fixtures : Userdemo1
-Mot de passe Administrateur : AdminPassword
 
+## Pour Tester :
+
+les comptes pour tester le projet : 
+
+
+* Mot de passe des comptes user : **Userdemo1** 
+* Mot de passe du compte **Admin** : **AdminPassword**
