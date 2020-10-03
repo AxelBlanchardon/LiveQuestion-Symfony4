@@ -1,6 +1,6 @@
 # LiveQuestion-Symfony4 
 
-Projet LiveQuestion dans le cadre du BTS SIO option SLAM Description : Réalisation d'un réseau social avec le framework Symfony, les utilisateurs une fois inscris peuvent se connecter, poser des questions et repondre à celles des autres.
+Réalisation d'un petit réseau social avec le framework Symfony, les utilisateurs peuvent s'inscrire, modifier leur profil, poser des questions et repondre à celles des autres et les liker.
 
 ## Contexte :
 
@@ -17,13 +17,12 @@ Projet personnel encadré (PPE) réalisé en équipe de 4 pour le BTS SIO SLAM.
 * Versionning : git, Bitbucket
 * Gestion de projet : Trello
 
-### Outils utilisés :
+### Les développeurs :
 
 * Axel Blanchardon
 * Allan Beliez
 * Youssef Guerzou
 * Arnaud Lagarde
-
 
 
 ### Installation : 
